@@ -21,3 +21,10 @@ def test_shuffle(self):
     deck_two = Deck()
     deck_two.shuffle()
     self.assertNotEqual(str(deck_one), str(deck_two))
+
+def test_deal(self):
+    deck = Deck()
+    num_before = len(deck.cards)
+    deck.deal()
+    num_after = len(deck.cards)
+    self.assertEqual(num_before, num_after + 1)
