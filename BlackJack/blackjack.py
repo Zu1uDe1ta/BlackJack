@@ -8,28 +8,23 @@ card = [
     '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A',
     '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A',
 ]
+hand = []
 
 def value_of_card(hand):
-    non_aces = [card in hand != 'A']
-    aces = [card in hand == 'A']
+    non_aces = [card for card in hand if card != 'A']
+    aces = [card for card in hand if card == 'A']
     sum = 0
     for card in non_aces:
         if card in 'JQK':
             sum += 10
     else:
         sum += int(card)
-
-    def ace(self):
-        """Is this card an ace?"""
-
         for card in aces:
             if sum <= 10:
                 sum += 11
         else:
             sum += 1
         return sum
-
-
 
 while True:
     cards = [
@@ -39,10 +34,12 @@ while True:
         '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A',
     ]
 
+def shuffle(cards):
     random.shuffle(cards)
 
     dealer = []
     player = []
+
 
     player.append(cards.pop())
     dealer.append(cards.pop())
@@ -55,8 +52,8 @@ while True:
     while True:
         os.system('clear')
 
-        player_score = calc_hand(player)
-        dealer_score = calc_hand(dealer)
+        player_score = value_of_card(player)
+        dealer_score = value_of_card(dealer)
 
         if standing:
             print('Dealer Cards: [{}] ({})'.format(']['.join(dealer), dealer_score))
@@ -106,5 +103,5 @@ while True:
             player.append(cards.pop())
         elif choice == '2':
             standing = True
-            while calc_hand(dealer) <= 16:
+            while value_of_card(dealer) <= 16:
                 dealer.append(cards.pop())
