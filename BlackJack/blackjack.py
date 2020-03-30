@@ -1,25 +1,35 @@
 import os
 import random
 
-def calc_hand(hand):
-    non_aces = [c for c in hand if c != 'A']
-    aces = [c for c in hand if c == 'A']
+card_rank = ("A", "K", "Q", "J", "10", "9", "8", "7", "6", "5", "4", "3", "2")
+card = [
+    '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A',
+    '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A',
+    '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A',
+    '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A',
+]
 
+def value_of_card(hand):
+    non_aces = [card in hand != 'A']
+    aces = [card in hand == 'A']
     sum = 0
-
     for card in non_aces:
         if card in 'JQK':
             sum += 10
-        else:
-            sum += int(card)
+    else:
+        sum += int(card)
 
-    for card in aces:
-        if sum <= 10:
-            sum += 11
+    def ace(self):
+        """Is this card an ace?"""
+
+        for card in aces:
+            if sum <= 10:
+                sum += 11
         else:
             sum += 1
+        return sum
 
-    return sum
+
 
 while True:
     cards = [
@@ -43,7 +53,7 @@ while True:
     standing = False
 
     while True:
-        os.system('cls' if os.name == 'nt' else 'clear')
+        os.system('clear')
 
         player_score = calc_hand(player)
         dealer_score = calc_hand(dealer)
@@ -64,7 +74,7 @@ while True:
             elif player_score > dealer_score:
                 print('You beat the dealer, you win!')
             else:
-                print('You lose :(')
+                print('You lose, try again!')
 
             print('')
             input('Play again? Hit enter to continue')

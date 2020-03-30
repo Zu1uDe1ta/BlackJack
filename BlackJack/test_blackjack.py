@@ -4,9 +4,8 @@ import blackjack as bj
 
 
 class CardTestCase(unittest.TestCase):
-        """Unit tests for Blackjack Card class"""
+
     def test_value_of_card(self):
-        """Does card return correct value?"""
         card = Card("5")
         self.assertEqual(card.value(), 5)
         card = Card("A")
